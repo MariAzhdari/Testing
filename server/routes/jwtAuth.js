@@ -41,6 +41,19 @@ router.post("/register", async (req, res) => {
 });
 
 
+//login route
+
+router.post("/login",  async (req, res) => {
+
+
+  try {
+    
+   
+  } catch (err) {
+    console.error(err.message);
+  }
+})
+
 
 
 
