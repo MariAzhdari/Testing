@@ -15,6 +15,13 @@ router.post("/register", async (req, res) => {
        return res.status(401).json("User already exist!");
      }
 
+
+
+    
+    const salt = await bcrypt.genSalt(10);
+    const bcryptPassword = await bcrypt.hash(password, salt);
+
+
     res.json(user.rows);
   } catch (err) {
     console.error(err.message);
