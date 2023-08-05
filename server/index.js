@@ -8,6 +8,12 @@ app.use(cors());
 app.use(express.json());
 
 //routes
+app.use("/authorize ", require("./routes/jwtAuth"));
+
+app.use("/dashboard", require("./routes/dashboard"));
+
+
+
 app.use("/auth", require("./routes/jwtAuth"));
 
 app.listen(5000, () => {

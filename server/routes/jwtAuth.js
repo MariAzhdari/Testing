@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const pool = require("../db");
 const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
+const authorize = require("../middleware/authorize");
 
 //1
 router.post("/register", validInfo, async (req, res) => {
@@ -76,6 +77,17 @@ router.post("/login", validInfo, async (req, res) => {
     res.json({ token });
   } catch (err) {
     console.error(err.message);
+  }
+});
+
+//it is just for now  I will remove it when i done frontend
+router.get("/is-verify", authorize, async (req, res) => {
+  try {
+    res.json(true);
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
 });
 
