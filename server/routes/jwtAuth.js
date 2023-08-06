@@ -31,18 +31,13 @@ router.post("/register", validInfo, async (req, res) => {
 
     //5
     const token = jwtGenerator(newUser.rows[0].user_id);
-
-    res.json({ token });
+    const { user_name, user_email } = newUser.rows[0];
+    res.json({ token, user_email, user_name });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 });
-
-
-
-
-
 
 //login route
 
@@ -84,16 +79,10 @@ router.post("/login", validInfo, async (req, res) => {
 router.get("/is-verify", authorize, async (req, res) => {
   try {
     res.json(true);
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 });
-
-
-
-
-
 
 module.exports = router;
