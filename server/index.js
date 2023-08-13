@@ -1,21 +1,21 @@
 const express = require("express");
 const app = express();
-const cors = require("cors");
+const { Pool } = require("pg");
 
-//middleware
+const pool = new Pool({
+  host: "localhost",
+  user: "postgres",
+  password: "Mars.1994",
+  port: 5432,
+  database: "jwttutorial",
+});
 
-app.use(cors());
-app.use(express.json());
-
-//routes
-app.use("/authorize ", require("./routes/jwtAuth"));
-
-app.use("/dashboard", require("./routes/dashboard"));
+pool.query("SELECT * from users", (err, res) => {
+  console.log(err, res);
+  pool.end();
+});
 
 
-
-app.use("/auth", require("./routes/jwtAuth"));
-
-app.listen(5000, () => {
-  console.log(`Server is starting on port 5000`);
+app.listen(8800, () => {
+  console.log("Server is running on port 3000");
 });
